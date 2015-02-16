@@ -14,7 +14,7 @@ particles = []
 
 #Add's a particle to the center of the screen
 def add_particle():
-	p = Particle(200,150,1)
+	p = Particle(200,150,10)
 	particles.append(p)
 
 #################
@@ -31,7 +31,7 @@ class Particle:
 		self.y = y
 		self.size = size
 		self.color = (random.random()*255,random.random()*255,random.random()*255)
-		self.yspeed = -5
+		self.yspeed = int(-5+(random.random())*10-random.random()*5)
 		self.xspeed = int(-5+(random.random())*10)
 
 		#We don't let particles have an xspeed of 0
@@ -40,13 +40,13 @@ class Particle:
 
 	#Draw method
 	def display(self):
-		if self.y > 300:
+		if self.y > 300 + self.size:
 			return
 		self.y += self.yspeed
 		self.x += self.xspeed
 		if tick % 4 == 0:
 			self.yspeed += 1
-			self.size += 50
+		self.size += 5
 		pygame.draw.circle(window, self.color, (self.x, self.y), self.size)
 
 ##################
@@ -69,7 +69,7 @@ while Running:
 
 	#Every 10 ticks
 	#Add a particle
-	if tick % 2 == 0:
+	if tick % 5 == 0:
 		add_particle()
 		add_particle()
 		add_particle()
